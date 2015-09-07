@@ -121,7 +121,13 @@ Create two users with role translator with from/to_language "en/fr" and "fr/es".
 
 # Changelog
 
-0.1 - First commit
+## 0.2
+
+Add methods `having_translation`, `missing_translation` and `preload_translation`
+
+## 0.1
+
+First commit
 
 # Licensing
 
