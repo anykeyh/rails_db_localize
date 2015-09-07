@@ -34,6 +34,11 @@ class ActiveRecord::Base
           where("\"#{arel_table.name}\".id IN (#{__rails_db_translations_sub_query(lang).to_sql})")
         }
 
+        def self.preload_translations
+          RailsDbLocalize::TranslationCache.instance.prefetch_collections(self)
+          self
+        end
+
       end
 
       fields.each do |field|

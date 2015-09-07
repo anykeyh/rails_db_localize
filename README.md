@@ -85,6 +85,9 @@ To avoid N+1 requests, please use the preloader on every array of models you wan
     @categories = Category.all
     #Only one request per preload_translations_for call
     preload_translations_for(@translatables, @categories)
+
+    #If you have only one set of data, you can use the model method:
+    @categories.preload_translations
 ```
 
 # Other features
