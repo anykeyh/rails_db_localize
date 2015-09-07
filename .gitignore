@@ -35,6 +35,8 @@ bower.json
 .powenv
 .DS_Store
 
+*.gem
+
 /test/dummy/log
 /test/dummy/tmp
 /test/dummy/db/*.sqlite3
