@@ -34,3 +34,13 @@ bower.json
 # Ignore pow environment settings
 .powenv
 .DS_Store
+
+/test/dummy/log
+/test/dummy/tmp
+/test/dummy/db/*.sqlite3
+/test/dummy/db/*.sqlite3-journal
+/test/dummy/public/system
+/test/dummy/coverage/
+/test/dummy/spec/tmp
+
+*.cache
