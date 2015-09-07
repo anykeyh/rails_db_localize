@@ -1,0 +1,32 @@
+<div>
+  <h1>Test Translatable</h1>
+  <h2>TR Table:</h2>
+  <pre><%= RailsDbLocalize::Translation.all.pluck(:id, :compound_key, :field, :lang, :content).map{|x| x.inspect}.join("\n") %></pre>
+  <h2>Cache info:</h2>
+  <pre><%= RailsDbLocalize::TranslationCache.instance.cache %></pre>
+  <h2>Table info:</h2>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Name</th>
+      <th>TR EN</th>
+      <th>TR ES</th>
+      <th>TR FR</th>
+      <th>Actions</th>
+    </thead>
+    <% @translatables.each do |t| %>
+    <tr>
+      <td><%= t.id %></td>
+      <td><%= t.name %></td>
+      <td><%= t.name_translated %></td>
+      <td><%= t.name_translated(:es) %></td>
+      <td><%= t.name_translated(:fr) %></td>
+      <td>
+        <a href="/set_tr/<%=t.id%>/en">GEN EN</a>
+        <a href="/set_tr/<%=t.id%>/es">GEN ES</a>
+        <a href="/set_tr/<%=t.id%>/fr">GEN FR</a>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
