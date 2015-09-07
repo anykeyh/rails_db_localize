@@ -16,7 +16,8 @@ class RailsDbLocalize::Translation < ActiveRecord::Base
   before_validation :set_compound_key
 
   def self.generate_ck resource_type, resource_id
-    [resource_type.to_s.underscore, resource_id].join("|")
+    #Keep it 32bits.
+    [resource_type.to_s.underscore, resource_id].join("|").hash & 0x7fffffff
   end
 
    def self.get_untranslated model, field, lang

@@ -11,20 +11,21 @@ class RailsDbLocalize::TranslationCache
 
 protected
   def initialize
-    @cache = {}
+    @cache = { :data => {}, :cks => {} }
   end
 
   def encache plucked
-    plucked.each do |ck_f_l_c|
-      ck,f, l,c = ck_f_l_c #compound_key, field, lang and content
-      @cache[ck]      ||= {}
-      @cache[ck][l]   ||= {}
-      @cache[ck][l][f] = c
+    plucked.each do |rt_ri_f_l_c|
+      rt,ri,f, l,c = rt_ri_f_l_c #ressource_type, ressource_id, field, lang and content
+      @cache[:data][rt]          ||= {}
+      @cache[:data][rt][ri]      ||= {}
+      @cache[:data][rt][ri][l]   ||= {}
+      @cache[:data][rt][ri][l][f] = c
     end
   end
 
   def is_cached *cks
-    cks.each{ |ck| @cache[ck] ||= {} }
+    cks.each{ |ck| @cache[:cks][ck] ||= true }
   end
 
 public
@@ -56,21 +57,21 @@ public
     end
 
     is_cached(*in_clause)
-    encache RailsDbLocalize::Translation.where("compound_key IN (?)", in_clause).pluck(:compound_key, :field, :lang, :content)
+    encache RailsDbLocalize::Translation.where("compound_key IN (?)", in_clause).pluck(:resource_type, :resource_id, :field, :lang, :content)
   end
 
   def get_translation_for model_class, model_id, field, lang, default
     ck = RailsDbLocalize::Translation.generate_ck(model_class, model_id)
 
-    if @cache[ck]
+    if @cache[:cks][ck]
       #Prefetch was done. Check if there's a value
-      @cache[ck].try(:[], lang.to_s).try(:[], field.to_s) || default
+      @cache[:data][model_class.to_s].try(:[], model_id).try(:[], lang.to_s).try(:[], field.to_s) || default
     else
       #Do the query if no prefetch was done
       RailsDbLocalize::Translation.where(
-        compound_key: ck, field: field, lang: lang
+        resource_type: model_class.to_s, resource_id: model_id, field: field, lang: lang
         ).select(:content).first.try(:content) || default
-      # BTW We don't cache it since a cache is done into ActiveRecord core...
+      # BTW We don't cache it now since a cache is done into ActiveRecord core...
     end
 
   end

@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_db_localize (0.0.1)
-      rails (~> 4)
+      rails (>= 4)
 
 GEM
   remote: https://rubygems.org/
@@ -112,8 +112,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  better_errors
-  binding_of_caller
-  faker
+  better_errors (>= 2.1)
+  binding_of_caller (>= 0.7)
+  faker (~> 1.4)
   rails_db_localize!
-  sqlite3
+  sqlite3 (~> 1)

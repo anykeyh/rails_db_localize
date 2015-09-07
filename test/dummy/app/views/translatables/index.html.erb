@@ -1,5 +1,9 @@
 <div>
   <h1>Test Translatable</h1>
+  <h2>Schema:</h2>
+  <pre>
+  <%= RailsDbLocalize::schema.inspect %>
+  </pre>
   <h2>TR Table:</h2>
   <pre><%= RailsDbLocalize::Translation.all.pluck(:id, :compound_key, :field, :lang, :content).map{|x| x.inspect}.join("\n") %></pre>
   <h2>Cache info:</h2>

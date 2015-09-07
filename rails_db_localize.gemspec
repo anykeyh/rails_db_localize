@@ -7,20 +7,20 @@ require "rails_db_localize/version"
 Gem::Specification.new do |s|
   s.name        = "rails_db_localize"
   s.version     = RailsDbLocalize::VERSION
-  s.authors     = [""]
+  s.authors     = ["Yacine PETITPREZ"]
   s.email       = ["yacine@redtonic.net"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of RailsDbLocalize."
+  s.homepage    = "https://github.com/anykeyh/rails_db_localize"
+  s.summary     = " gem for managing translations of database objects without any pain."
   s.description = "TODO: Description of RailsDbLocalize."
-  s.license     = "MIT"
+  s.license     = "APACHE 2.0"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4"
+  s.add_dependency "rails", ">= 4"
 
-  s.add_development_dependency "sqlite3"
-  s.add_development_dependency "faker"
-  s.add_development_dependency "better_errors"
-  s.add_development_dependency "binding_of_caller"
+  s.add_development_dependency "sqlite3", "~> 1"
+  s.add_development_dependency "faker", "~> 1.4"
+  s.add_development_dependency "better_errors", ">= 2.1"
+  s.add_development_dependency "binding_of_caller", ">= 0.7"
 end

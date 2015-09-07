@@ -6,7 +6,7 @@ class ActiveRecord::Migration
 
         t.string :field, index: true
         t.string :lang, index: true
-        t.string :compound_key, index: true
+        t.integer :compound_key, index: true
 
         t.text :content
         t.timestamp

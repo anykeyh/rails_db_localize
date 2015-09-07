@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150907053908) do
     t.integer "resource_id"
     t.string  "field"
     t.string  "lang"
-    t.string  "compound_key"
+    t.integer "compound_key"
     t.text    "content"
   end
 

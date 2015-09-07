@@ -1,6 +1,6 @@
 class TranslatablesController < ApplicationController
   def index
-    @translatables = Translatable.where(nil)
+    @translatables = Translatable.all
     preload_translations_for(@translatables)
   end
 
