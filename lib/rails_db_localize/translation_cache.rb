@@ -60,7 +60,7 @@ public
     encache RailsDbLocalize::Translation.where("compound_key IN (?)", in_clause).pluck(:resource_type, :resource_id, :field, :lang, :content)
   end
 
-  def get_translation_for model_class, model_id, field, lang, default
+  def get_translation_for model_class, model_id, field, lang, default=nil
     ck = RailsDbLocalize::Translation.generate_ck(model_class, model_id)
 
     if @cache[:cks][ck]

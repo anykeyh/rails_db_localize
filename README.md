@@ -9,21 +9,20 @@ The most annoying part is globalize3 create a table for each object you want to 
 
 I've made this gem with theses rules in head:
 
-## 1/ Translation just in time.
+### 1/ Translation just in time.
 
 You don't need to think about translation in your project until you begin the translation process.
 `rails_db_localize` doesn't modify your database schematic but instead just add a layer on it.
 
-## 2/ One table to bring them all.
+### 2/ One table to bring them all.
 
 `rails_db_localize` add only one table to your project. All your translations are stored inside this table.
 This allow you to make without any pain a tool to manage a team of traductors for example. 
 
 Since everything is in the same table, one controller is enough to manage the translation process!
-About performance, `rails_db_localize` use some optimisations for fetching the rows (caching and hashing system).
+About performance, `rails_db_localize` use some optimizations for fetching the rows (caching and hashing system).
 
-
-## 3/ Only one query for all your translations
+### 3/ Only one query for all your translations
 
 Thanks to the caching system, `rails_db_localize` need only one query to retrieve all the translations of your current view (see below)
 
@@ -77,7 +76,7 @@ or:
   model.name_translated = "Name in french", :fr
 ```
 
-# SQL Optimisation
+# SQL Optimization
 
 To avoid N+1 requests, please use the preloader on every array of models you want to use:
 
@@ -87,6 +86,35 @@ To avoid N+1 requests, please use the preloader on every array of models you wan
     #Only one request per preload_translations_for call
     preload_translations_for(@translatables, @categories)
 ```
+
+# Other features
+
+Each model having at least a translated field can use `missing_translation` and `having_translation`
+
+Theses methods allow you to filters your models if they are translated or not.
+
+### Blog case:
+
+You have a blog with articles in two languages but you don't translate all articles.
+To show articles from the current langage selected on your blog, you can use:
+
+```ruby
+  def index
+    @articles = Articles.having_translation(I18n.locale).all
+  end
+```
+
+### Other case:
+
+You have a team of translators:
+- One can translate from english to french
+- Another one can translate from french to spanish
+
+You just have to filters the articles in your translation tool like this:
+```ruby
+  Articles.having_translation(translator.from_language).missing_translation(translator.to_language)
+```
+Create two users with role translator with from/to_language "en/fr" and "fr/es". Et voilà!
 
 # Changelog
 
