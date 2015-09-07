@@ -17,7 +17,9 @@ You don't need to think about translation in your project until you begin the tr
 ## 2/ One table to bring them all.
 
 `rails_db_localize` add only one table to your project. All your translations are stored inside this table.
-This allow you to make without any pain a tool to manage a team of traductors for example. Since everything is in the same table, one controller is enough to manage the translation process!
+This allow you to make without any pain a tool to manage a team of traductors for example. 
+
+Since everything is in the same table, one controller is enough to manage the translation process!
 About performance, `rails_db_localize` use some optimisations for fetching the rows (caching and hashing system).
 
 
@@ -79,7 +81,7 @@ or:
 
 To avoid N+1 requests, please use the preloader on every array of models you want to use:
 
-```
+```ruby
     @translatables = Translatable.all
     @categories = Category.all
     #Only one request per preload_translations_for call
