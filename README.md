@@ -121,6 +121,14 @@ Create two users with role translator with from/to_language "en/fr" and "fr/es".
 
 # Changelog
 
+## 0.3
+
+* Fix issues inside the gem.
+
+* Add the rake task rails_db_localize:delete_orphans
+
+This task allow you to delete the old translations which not belongs to any model and/or belongs to a field/model which isn't existing anymore.
+
 ## 0.2
 
 Add methods `having_translation`, `missing_translation` and `preload_translation`
