@@ -11,7 +11,8 @@ class RailsDbLocalize::Translation < ActiveRecord::Base
 
   validates :content, uniqueness: { scope: [:lang, :field, :resource_type, :resource_id] }
 
-  scope :with_language, lambda { |x| where("lang LIKE ?", "#{x}%") }
+  scope :for_language, lambda { |x| where(lang: x) }
+  scope :for_model, lambda { |m| where(resource_type: m.class, resource_id: m.id) }
 
   before_validation :set_compound_key
 

@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.license     = "APACHE 2.0"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
+  #Remove the test_files to weight down the gem...
   #s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 4"

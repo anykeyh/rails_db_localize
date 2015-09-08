@@ -6,7 +6,7 @@ class ActiveRecord::Base
       unless @__rdbl_translations
         @__rdbl_translations = true
         # Register it mostly to remove the translations once you delete an object
-        self.has_many :translations, as: :resource, dependent: :destroy
+        self.has_many :translations, class_name: "RailsDbLocalize::Translation", as: :resource, dependent: :destroy
 
         scope :__rails_db_translations_sub_query, lambda{ |lang|
           ttable = RailsDbLocalize::Translation.arel_table.name

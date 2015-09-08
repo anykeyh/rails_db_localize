@@ -10,8 +10,8 @@ module RailsDbLocalize
 
     def add_to_schema model, field
       @schema ||= {}
-      @schema[model.to_s] ||= []
-      @schema[model.to_s] << field
+      arr = (@schema[model.to_s] ||= [])
+      arr << field unless arr.index(field)
     end
 
     def load!
