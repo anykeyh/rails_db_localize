@@ -22,6 +22,10 @@ module RailsDbLocalize
         ActiveSupport::Dependencies.autoload_once_paths.delete(path)
       end
     end
+
+    def gem_path
+      @gem_path ||= File.expand_path("..", File.dirname(__FILE__))
+    end
   end
 end
 
@@ -32,6 +36,6 @@ def __rdbl_require(*args)
 end
 
 __rdbl_require 'rails_db_localize/translation_cache'
+__rdbl_require 'rails_db_localize/railtie'
 __rdbl_require 'ext/active_record_ext', 'ext/controller_ext', 'ext/migration_ext'
-
 RailsDbLocalize::load!

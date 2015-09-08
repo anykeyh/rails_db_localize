@@ -10,12 +10,12 @@ Gem::Specification.new do |s|
   s.authors     = ["Yacine PETITPREZ"]
   s.email       = ["yacine@redtonic.net"]
   s.homepage    = "https://github.com/anykeyh/rails_db_localize"
-  s.summary     = "Gem for managing translations of database objects without any pain."
+  s.summary     = "Manage database translations without any pain."
   s.description = "Translation JIT: You don't need to think about translation in your project until you begin the translation process..."
   s.license     = "APACHE 2.0"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
-  s.test_files = Dir["test/**/*"]
+  #s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 4"
 

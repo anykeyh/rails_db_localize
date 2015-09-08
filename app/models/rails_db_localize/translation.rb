@@ -15,8 +15,6 @@ class RailsDbLocalize::Translation < ActiveRecord::Base
 
   before_validation :set_compound_key
 
-
-
   def self.generate_ck resource_type, resource_id
     hash_long = [resource_type.to_s.underscore, resource_id].join("|").chars.map(&:ord).inject(5381) do |h, v|
       h = ((h<<5)+h)+v
@@ -24,13 +22,6 @@ class RailsDbLocalize::Translation < ActiveRecord::Base
 
     #Keep it signed 32bits.
     hash_long & 0x7fffffff
-  end
-
-
-   def self.get_untranslated model, field, lang
-    model.where("id NOT IN (?)",
-      [-1, *RailsDbLocalize::Translation.where(resource_type: k.to_s, lang: lang, field: field).pluck(:resource_id).uniq]
-    )
   end
 
 private

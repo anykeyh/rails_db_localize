@@ -6,7 +6,7 @@ class ActionController::Base
 
   # Preload the translations string for all the collections.
   # This allow to load all translation resources in only one SQL query.
-  # Take in consideration this will execute the request for
+  # Take in consideration this will execute the request
   def preload_translations_for *collections
     RailsDbLocalize::TranslationCache.instance.prefetch_collections(*collections)
   end
