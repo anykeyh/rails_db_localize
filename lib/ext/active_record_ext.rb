@@ -3,8 +3,8 @@ class ActiveRecord::Base
 
     def has_translations *fields
 
-      unless @__rdbl_translations
-        @__rdbl_translations = true
+      unless respond_to?(:missing_translation)
+
         # Register it mostly to remove the translations once you delete an object
         self.has_many :translations, class_name: "RailsDbLocalize::Translation", as: :resource, dependent: :destroy
 
