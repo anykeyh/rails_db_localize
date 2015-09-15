@@ -1,13 +1,13 @@
 class TranslatablesController < ApplicationController
   def index
-    @translatables = Translatable.all
+    @translatables = Translatable2.all
     preload_translations_for(@translatables)
   end
 
   def set_tr
     require 'faker'
 
-    @translatable = Translatable.find(params[:id])
+    @translatable = Translatable2.find(params[:id])
     @translatable.name_translated = Faker::Lorem.paragraph, params[:lang]
     @translatable.save!
 

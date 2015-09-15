@@ -18,7 +18,7 @@ class RailsDbLocalize::Translation < ActiveRecord::Base
 
   def self.generate_ck resource_type, resource_id
     hash_long = [resource_type.to_s.underscore, resource_id].join("|").chars.map(&:ord).inject(5381) do |h, v|
-      h = ((h<<5)+h)+v
+      h += ((h<<5)+h)+v
     end
 
     #Keep it signed 32bits.

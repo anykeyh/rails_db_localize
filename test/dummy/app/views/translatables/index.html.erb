@@ -5,7 +5,7 @@
   <%= RailsDbLocalize::schema.inspect %>
   </pre>
   <h2>TR Table:</h2>
-  <pre><%= RailsDbLocalize::Translation.all.pluck(:id, :compound_key, :field, :lang, :content).map{|x| x.inspect}.join("\n") %></pre>
+  <pre><%= RailsDbLocalize::Translation.all.pluck(:id, :resource_type, :resource_id, :compound_key, :field, :lang, :content).map{|x| x.inspect}.join("\n") %></pre>
   <h2>Cache info:</h2>
   <pre><%= RailsDbLocalize::TranslationCache.instance.cache %></pre>
   <h2>Table info:</h2>
