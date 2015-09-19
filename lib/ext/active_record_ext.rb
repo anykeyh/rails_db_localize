@@ -23,7 +23,7 @@ class ActiveRecord::Base
               table.select(:id).joins("INNER JOIN \"#{ttable}\"
                 ON (\"#{ttable}\".resource_id = \"#{arel_table.name}\".id
                 AND \"#{ttable}\".resource_type = '#{to_s}')")
-              .group(:resource_type, :resource_id, :id)
+              .group(:resource_type, :resource_id, "#{arel_table.name}.id")
               .having("COUNT(*) = #{number_of_fields_to_translates}")
               .where(:"rails_db_localize_translations.lang" => lang)
             }
