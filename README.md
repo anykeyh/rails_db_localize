@@ -121,6 +121,10 @@ Create two users with role translator with from/to_language "en/fr" and "fr/es".
 
 # Changelog
 
+## 0.8
+
+* The gem is now compatible with postgresql
+
 ## 0.3
 
 * Fix issues inside the gem.
