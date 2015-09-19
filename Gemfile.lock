@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_db_localize (0.0.7)
+    rails_db_localize (0.0.9)
       rails (>= 4)
 
 GEM
