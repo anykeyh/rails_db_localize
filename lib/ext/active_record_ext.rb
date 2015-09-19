@@ -8,7 +8,17 @@ class ActiveRecord::Base
             # Register it mostly to remove the translations once you delete an object
             has_many :translations, class_name: "RailsDbLocalize::Translation", as: :resource, dependent: :destroy
 
+
             scope :__rails_db_translations_sub_query, lambda{ |lang|
+              adapter = Rails.configuration.database_configuration[Rails.env]["adapter"]
+
+              having_clause = case adapter
+              when 'postgresql'
+                lambda{ "COUNT(*) == #{number_of_fields_to_translates}::bigint" }
+              else
+                lambda{ "COUNT(*) == #{number_of_fields_to_translates}" }
+              end
+
               ttable = RailsDbLocalize::Translation.arel_table.name
               number_of_fields_to_translates = RailsDbLocalize.schema[self.to_s].count
 
@@ -20,7 +30,7 @@ class ActiveRecord::Base
                 ON (\"#{ttable}\".resource_id = \"#{arel_table.name}\".id
                 AND \"#{ttable}\".resource_type = '#{to_s}')")
               .group(:resource_type, :resource_id)
-              .having("COUNT(*) == #{number_of_fields_to_translates}")
+              .having(having_clause.call)
               .where(:"rails_db_localize_translations.lang" => lang)
             }
 
