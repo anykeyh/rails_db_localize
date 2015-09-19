@@ -3,7 +3,7 @@ namespace :db do
   task :populate => :environment do
     require 'faker'
     1000.times do |x|
-      t = Translatable.new
+      t = Translatable2.new
       t.name = Faker::Lorem.paragraph
       t.save!
     end

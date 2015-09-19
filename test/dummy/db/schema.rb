@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150907053908) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "rails_db_localize_translations", force: :cascade do |t|
     t.string  "resource_type"
     t.integer "resource_id"
@@ -22,16 +25,16 @@ ActiveRecord::Schema.define(version: 20150907053908) do
     t.text    "content"
   end
 
-  add_index "rails_db_localize_translations", ["compound_key", "field", "lang"], name: "index_rdblt_cfl"
-  add_index "rails_db_localize_translations", ["compound_key", "field"], name: "index_rdblt_cf"
-  add_index "rails_db_localize_translations", ["compound_key"], name: "index_rails_db_localize_translations_on_compound_key"
-  add_index "rails_db_localize_translations", ["field"], name: "index_rails_db_localize_translations_on_field"
-  add_index "rails_db_localize_translations", ["lang"], name: "index_rails_db_localize_translations_on_lang"
-  add_index "rails_db_localize_translations", ["resource_id", "resource_type", "field", "lang"], name: "index_rdblt_itfl"
-  add_index "rails_db_localize_translations", ["resource_id", "resource_type", "field"], name: "index_rdblt_itf"
-  add_index "rails_db_localize_translations", ["resource_id", "resource_type"], name: "index_rdblt_it"
-  add_index "rails_db_localize_translations", ["resource_id"], name: "index_rails_db_localize_translations_on_resource_id"
-  add_index "rails_db_localize_translations", ["resource_type"], name: "index_rails_db_localize_translations_on_resource_type"
+  add_index "rails_db_localize_translations", ["compound_key", "field", "lang"], name: "index_rdblt_cfl", using: :btree
+  add_index "rails_db_localize_translations", ["compound_key", "field"], name: "index_rdblt_cf", using: :btree
+  add_index "rails_db_localize_translations", ["compound_key"], name: "index_rails_db_localize_translations_on_compound_key", using: :btree
+  add_index "rails_db_localize_translations", ["field"], name: "index_rails_db_localize_translations_on_field", using: :btree
+  add_index "rails_db_localize_translations", ["lang"], name: "index_rails_db_localize_translations_on_lang", using: :btree
+  add_index "rails_db_localize_translations", ["resource_id", "resource_type", "field", "lang"], name: "index_rdblt_itfl", using: :btree
+  add_index "rails_db_localize_translations", ["resource_id", "resource_type", "field"], name: "index_rdblt_itf", using: :btree
+  add_index "rails_db_localize_translations", ["resource_id", "resource_type"], name: "index_rdblt_it", using: :btree
+  add_index "rails_db_localize_translations", ["resource_id"], name: "index_rails_db_localize_translations_on_resource_id", using: :btree
+  add_index "rails_db_localize_translations", ["resource_type"], name: "index_rails_db_localize_translations_on_resource_type", using: :btree
 
   create_table "translatables", force: :cascade do |t|
     t.string "name"

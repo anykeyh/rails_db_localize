@@ -35,7 +35,7 @@ public
   def prefetch_collections *collections
     # empty string is used here to be sure there's at least one element
     # for IN clause in SQL (otherwise it will fail miserabily)
-    in_clause = collections.inject([""]) do |arr, collection|
+    in_clause = collections.inject([-1]) do |arr, collection|
       klass = if collection.respond_to?(:klass)
         collection.klass #is a ActiveRecord::Relation
       else
