@@ -12,6 +12,8 @@ class ActiveRecord::Base
             scope :__rails_db_translations_sub_query, lambda{ |lang|
               adapter = Rails.configuration.database_configuration[Rails.env]["adapter"]
 
+              number_of_fields_to_translates = RailsDbLocalize.schema[self.to_s].count
+
               having_clause = case adapter
               when 'postgresql'
                 lambda{ "COUNT(*) == #{number_of_fields_to_translates}::bigint" }
@@ -20,7 +22,6 @@ class ActiveRecord::Base
               end
 
               ttable = RailsDbLocalize::Translation.arel_table.name
-              number_of_fields_to_translates = RailsDbLocalize.schema[self.to_s].count
 
               # We can unscope, but problems tend to appears
               # with some gems like paranoid.
