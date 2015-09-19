@@ -14,13 +14,6 @@ class ActiveRecord::Base
 
               number_of_fields_to_translates = RailsDbLocalize.schema[self.to_s].count
 
-              having_clause = case adapter
-              when 'postgresql'
-                lambda{ "COUNT(*) == #{number_of_fields_to_translates}::bigint" }
-              else
-                lambda{ "COUNT(*) == #{number_of_fields_to_translates}" }
-              end
-
               ttable = RailsDbLocalize::Translation.arel_table.name
 
               # We can unscope, but problems tend to appears
@@ -31,7 +24,7 @@ class ActiveRecord::Base
                 ON (\"#{ttable}\".resource_id = \"#{arel_table.name}\".id
                 AND \"#{ttable}\".resource_type = '#{to_s}')")
               .group(:resource_type, :resource_id)
-              .having(having_clause.call)
+              .having("COUNT(*) = #{number_of_fields_to_translates}")
               .where(:"rails_db_localize_translations.lang" => lang)
             }
 
